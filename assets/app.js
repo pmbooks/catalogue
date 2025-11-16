@@ -51,10 +51,29 @@ function renderPagination(list){pagination.innerHTML='';const pages=Math.max(1,M
 
 function renderCategories(){catRow.innerHTML='';const all=document.createElement('div');all.className='pill active';all.textContent='All';all.onclick=()=>{document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));all.classList.add('active');searchEl.value='';applyFilters()};catRow.appendChild(all);categories.forEach(c=>{const p=document.createElement('div');p.className='pill';p.textContent=c;p.onclick=()=>{document.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));p.classList.add('active');searchEl.value=c;applyFilters()};catRow.appendChild(p)});}
 
-function applyFilters(){const q=(searchEl.value||'').toLowerCase();filtered=books.filter(b=>((b.title||'')+' '+(b.author||'')+' '+(b.category||'')).toLowerCase().includes(q));const s=sortEl.value;if(s==='title')filtered.sort((a,b)=>a.title.localeCompare(b.title));if(s==='price_low')filtered.sort((a,b)=>a.price-b.price);if(s==='price_high')filtered.sort((a,b)=>b.price-a.price);currentPage=1;renderPage(filtered);renderPagination(filtered)}
+function applyFilters(){
+  const q = (searchEl.value || '').toLowerCase();
+  const lang = document.getElementById('lang').value;
+
+  filtered = books.filter(b => {
+    const matchesSearch = ((b.title || '') + ' ' + (b.author || '') + ' ' + (b.category || '')).toLowerCase().includes(q);
+    const matchesLang = (lang === 'all' || (b.language || '').toLowerCase() === lang.toLowerCase());
+    return matchesSearch && matchesLang;
+  });
+
+  const s = sortEl.value;
+  if (s === 'title') filtered.sort((a,b) => a.title.localeCompare(b.title));
+  if (s === 'price_low') filtered.sort((a,b) => a.price - b.price);
+  if (s === 'price_high') filtered.sort((a,b) => b.price - a.price);
+
+  currentPage = 1;
+  renderPage(filtered);
+  renderPagination(filtered);
+}
 
 fetch(BOOKS_URL).then(r=>{if(!r.ok)throw new Error('books.json load failed');return r.json()}).then(data=>{books=data.map((b,idx)=>({...b,id:b.id||String(idx+1),price:Number(b.price||0)}));categories=[...new Set(books.map(b=>b.category).filter(Boolean))];filtered=[...books];renderCategories();renderPage(filtered);renderPagination(filtered)}).catch(e=>{catalog.innerHTML='<p style="padding:1rem">Failed to load books.json</p>';console.error(e)});
 
 searchEl.addEventListener('input',applyFilters);sortEl.addEventListener('change',applyFilters);
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.setAttribute('aria-hidden','true')});
+
