@@ -1,5 +1,32 @@
 [
-  { "id":"1", "title":"Amazing Hanuman", "author":"Paramahamsa Prajnanananda", "category":"Spiritual", "price":350, "image":"https://via.placeholder.com/400x600?text=Hanuman", "detail_link":"#" },
-  { "id":"2", "title":"The Hamsa Gita", "author":"Paramahamsa Prajnanananda", "category":"Scripture", "price":520, "image":"https://via.placeholder.com/400x600?text=Hamsa+Gita", "detail_link":"#" },
-  { "id":"3", "title":"Navaratri: Nine-Day Worship", "author":"Paramahamsa Prajnanananda", "category":"Worship", "price":480, "image":"https://via.placeholder.com/400x600?text=Navaratri", "detail_link":"#" }
+  {
+    "id": "1",
+    "title": "Amazing Hanuman",
+    "author": "Paramahamsa Prajnanananda",
+    "category": "Spiritual",
+    "price": 350,
+    "image": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=60",
+    "detail_link": "https://kriya.org/store/product/amazing-hanuman/en",
+    "description": "One might wonder what significance the ancient tales of Shri Hanuman, one of India's most revered deities, hold for people in the world today. However, one needs to read only a few passages from this book to answer this question. His character, courage, selflessness, humility, and dedication to serving God and humankind are precisely what is lacking at this present time.\n\nFor centuries the spiritual luminaries of India have plumbed the depths of the Ramayana to understand Shri Hanuman, Lord Rama's greatest devotee. Paramahamsa Prajnanananda, the author of this book, is among them. A masterful storyteller with wisdom and insight, he unfolds the life and true purpose of Shri Hanuman in a poetic and revealing manner. He offers us a deeper understanding of what a selfless devotee can be. Hence, the reader will ultimately find that Shri Hanuman, the ever-devoted servant of the Lord, is the role model to guide our search for truth."
+  },
+  {
+    "id": "2",
+    "title": "The Hamsa Gita – A Practical Spiritual Dialogue",
+    "author": "Paramahamsa Prajnanananda",
+    "category": "Scripture",
+    "price": 520,
+    "image": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=60",
+    "detail_link": "https://kriya.org/store/product/the-hamsa-gita/en",
+    "description": "The Hamsa Gita is presented as a practical spiritual dialogue that guides the sincere aspirant through the core teachings of Vedanta. This book elucidates the path of self-knowledge with clarity and compassion.\n\nThrough conversations and stories, the book illuminates the means to integrate spiritual practice into everyday life, helping readers cultivate inner peace and steady wisdom."
+  },
+  {
+    "id": "3",
+    "title": "Navaratri: Nine-Day Worship of the Divine Mother",
+    "author": "Paramahamsa Prajnanananda",
+    "category": "Worship",
+    "price": 480,
+    "image": "https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=400&q=60",
+    "detail_link": "https://kriya.org/store/product/navaratri-nine-day-worship/en",
+    "description": "A devotional manual and commentary for those who wish to celebrate the nine days of Navaratri, honoring the Divine Mother. Practical guidance, mantras, and meditations are included to deepen one's experience of devotion.\n\nThe book balances textual exposition with experiential practices so that readers can follow a meaningful nine-day observance."
+  }
 ]
