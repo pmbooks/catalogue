@@ -80,10 +80,14 @@ function applyFilters(){
 
 fetch(BOOKS_URL).then(r=>{if(!r.ok)throw new Error('books.json load failed');return r.json()}).then(data=>{books=data.map((b,idx)=>({...b,id:b.id||String(idx+1),price:Number(b.price||0)}));categories=[...new Set(books.map(b=>b.category).filter(Boolean))];filtered=[...books];renderCategories();renderPage(filtered);renderPagination(filtered)}).catch(e=>{catalog.innerHTML='<p style="padding:1rem">Failed to load books.json</p>';console.error(e)});
 
-searchEl.addEventListener('input',applyFilters);sortEl.addEventListener('change',applyFilters);document.getElementById('lang').addEventListener('change', applyFilters);
-
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('lang').addEventListener('change', applyFilters);
+    searchEl.addEventListener('input', applyFilters);
+    sortEl.addEventListener('change', applyFilters);
+});
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.setAttribute('aria-hidden','true')});
+
 
 
 
