@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Kriya-Style Bookstore (₹) — Final</title>
+  <title>Kriya-Style Bookstore</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -11,23 +11,11 @@
     <div class="container header-row">
       <h1 class="logo">My Book Store</h1>
       <div class="controls">
-        <div class="search-wrap">
-          <label class="sr-only" for="search">Search</label>
-          <input id="search" placeholder="Search by title, author or category" autocomplete="off">
-        </div>
-        <div class="selects">
-          <select id="sort" aria-label="Sort">
-            <option value="default">Sort: Default</option>
-            <option value="title">Title A–Z</option>
-            <option value="price_low">Price Low → High</option>
-            <option value="price_high">Price High → Low</option>
-          </select>
-        </div>
+        <input id="search" placeholder="Search by title, author or category" />
+        <select id="sort"><option value="default">Sort</option><option value="title">Title A–Z</option><option value="price_low">Price Low→High</option><option value="price_high">Price High→Low</option></select>
       </div>
     </div>
-    <div class="container">
-      <div id="category-row" class="category-row" aria-hidden="false"></div>
-    </div>
+    <div class="container category-row" id="category-row"></div>
   </header>
 
   <main class="container">
@@ -35,8 +23,55 @@
     <nav id="pagination" class="pagination" aria-label="Pagination"></nav>
   </main>
 
-  <footer class="footer">© <span id="year"></span> My Book Store</footer>
+  <!-- Product Modal -->
+  <div id="product-modal" class="modal" aria-hidden="true">
+    <div class="modal-dialog">
+      <button id="close-modal" class="modal-close">×</button>
+      <div class="modal-left"><img id="modal-image" src="" alt=""></div>
+      <div class="modal-right">
+        <h2 id="modal-title"></h2>
+        <div id="modal-author" class="modal-author"></div>
+        <div id="modal-desc" class="modal-desc"></div>
+        <div class="modal-bottom">
+          <div id="modal-price" class="modal-price"></div>
+          <div>
+            <label>Qty</label>
+            <select id="modal-qty">
+              <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+            </select>
+            <button id="modal-add" class="buy">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <footer class="footer">© <span id="year"></span> My Book Store</footer>
   <script src="assets/app.js"></script>
+</body>
+</html>
+
+----- checkout.html -----
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Checkout - My Book Store</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="header"><div class="container"><h1 class="logo">My Book Store</h1></div></header>
+  <main class="container">
+    <h2>Shopping Cart</h2>
+    <div id="cart-area"></div>
+    <div class="checkout-actions">
+      <button id="continue" class="btn ghost">← Continue Shopping</button>
+      <div class="total-area">Amount Payable: <span id="grand-total">₹0.00</span></div>
+      <button id="proceed" class="btn primary">Proceed to Checkout</button>
+    </div>
+  </main>
+  <footer class="footer">© <span id="year-checkout"></span> My Book Store</footer>
+  <script src="assets/checkout.js"></script>
 </body>
 </html>
