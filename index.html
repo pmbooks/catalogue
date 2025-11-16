@@ -3,22 +3,39 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Fluid Book Store</title>
+  <title>Kriya-Style Bookstore (Enhanced)</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap">
-      <h1 class="brand">My Book Store</h1>
-      <input id="search" placeholder="Search books..." />
+  <header class="header">
+    <div class="container header-row">
+      <h1 class="logo">My Book Store</h1>
+      <div class="filters">
+        <div class="filter-group">
+          <label>Search By</label>
+          <input id="search" class="search" placeholder="Search books..." />
+        </div>
+        <div class="filter-group">
+          <label>Sort</label>
+          <select id="sort">
+            <option value="default">Default</option>
+            <option value="title">Title A–Z</option>
+            <option value="price_low">Price Low → High</option>
+            <option value="price_high">Price High → Low</option>
+          </select>
+        </div>
+      </div>
     </div>
+
+    <div class="container category-row" id="category-row"></div>
   </header>
 
-  <main class="wrap">
-    <section id="catalog" class="grid"></section>
+  <main class="container">
+    <div id="catalog" class="grid"></div>
+    <div id="pagination" class="pagination"></div>
   </main>
 
-  <footer class="site-footer">© <span id="year"></span> My Book Store</footer>
+  <footer class="footer">© <span id="year"></span> My Book Store</footer>
 
 <script src="assets/app.js"></script>
 </body>
