@@ -2,6 +2,7 @@
   {
     "id": "1",
     "title": "Amazing Hanuman",
+    "language": "English",
     "author": "Paramahamsa Prajnanananda",
     "category": "Spiritual",
     "price": 350,
@@ -12,6 +13,7 @@
   {
     "id": "2",
     "title": "The Hamsa Gita – A Practical Spiritual Dialogue",
+    "language": "English",
     "author": "Paramahamsa Prajnanananda",
     "category": "Scripture",
     "price": 520,
@@ -22,6 +24,7 @@
   {
     "id": "3",
     "title": "Navaratri: Nine-Day Worship of the Divine Mother",
+    "language": "English",
     "author": "Paramahamsa Prajnanananda",
     "category": "Worship",
     "price": 480,
@@ -30,3 +33,4 @@
     "description": "A devotional manual and commentary for those who wish to celebrate the nine days of Navaratri, honoring the Divine Mother. Practical guidance, mantras, and meditations are included to deepen one's experience of devotion.\n\nThe book balances textual exposition with experiential practices so that readers can follow a meaningful nine-day observance."
   }
 ]
+
