@@ -1,20 +1,42 @@
 [
   {
     "id": "1",
-    "title": "The Bhagavad Gita (Sample)",
-    "author": "Sri Krishna / Translation",
-    "category": "Spiritual",
-    "price": 149.00,
-    "image": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=60",
-    "detail_link": "https://en.wikipedia.org/wiki/Bhagavad_Gita"
+    "title": "Amazing Hanuman",
+    "author": "Paramahamsa Prajnanananda",
+    "price": 350,
+    "image": "https://kriya.org/sites/default/files/styles/product/public/book-images/hanuman.png",
+    "detail_link": "https://kriya.org/store/product/amazing-hanuman/en"
   },
   {
     "id": "2",
-    "title": "Learning JavaScript",
-    "author": "Author Dev",
-    "category": "Programming",
-    "price": 399.00,
-    "image": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=60",
-    "detail_link": "#"
+    "title": "The Hamsa Gita – A Practical Spiritual Dialogue",
+    "author": "Paramahamsa Prajnanananda",
+    "price": 520,
+    "image": "https://kriya.org/sites/default/files/styles/product/public/book-images/hamsa-gita.png",
+    "detail_link": "https://kriya.org/store/product/the-hamsa-gita/en"
+  },
+  {
+    "id": "3",
+    "title": "Navaratri: Nine-Day Worship of the Divine Mother",
+    "author": "Paramahamsa Prajnanananda",
+    "price": 480,
+    "image": "https://kriya.org/sites/default/files/styles/product/public/book-images/navaratri.png",
+    "detail_link": "https://kriya.org/store/product/navaratri-nine-day-worship/en"
+  },
+  {
+    "id": "4",
+    "title": "Shri Gurudev and the Cooks",
+    "author": "Paramahamsa Prajnanananda",
+    "price": 300,
+    "image": "https://kriya.org/sites/default/files/styles/product/public/book-images/cooks.png",
+    "detail_link": "https://kriya.org/store/product/shri-gurudev-and-the-cooks/en"
+  },
+  {
+    "id": "5",
+    "title": "Tao Te Ching in the Light of Kriya Yoga",
+    "author": "Paramahamsa Prajnanananda",
+    "price": 560,
+    "image": "https://kriya.org/sites/default/files/styles/product/public/book-images/tao-te-ching.png",
+    "detail_link": "https://kriya.org/store/product/tao-te-ching/en"
   }
 ]
