@@ -3,22 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Kriya-Style Bookstore (Enhanced)</title>
+  <title>Kriya-Style Bookstore (₹) — Final</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <header class="header">
     <div class="container header-row">
       <h1 class="logo">My Book Store</h1>
-      <div class="filters">
-        <div class="filter-group">
-          <label>Search By</label>
-          <input id="search" class="search" placeholder="Search books..." />
+      <div class="controls">
+        <div class="search-wrap">
+          <label class="sr-only" for="search">Search</label>
+          <input id="search" placeholder="Search by title, author or category" autocomplete="off">
         </div>
-        <div class="filter-group">
-          <label>Sort</label>
-          <select id="sort">
-            <option value="default">Default</option>
+        <div class="selects">
+          <select id="sort" aria-label="Sort">
+            <option value="default">Sort: Default</option>
             <option value="title">Title A–Z</option>
             <option value="price_low">Price Low → High</option>
             <option value="price_high">Price High → Low</option>
@@ -26,17 +25,18 @@
         </div>
       </div>
     </div>
-
-    <div class="container category-row" id="category-row"></div>
+    <div class="container">
+      <div id="category-row" class="category-row" aria-hidden="false"></div>
+    </div>
   </header>
 
   <main class="container">
-    <div id="catalog" class="grid"></div>
-    <div id="pagination" class="pagination"></div>
+    <div id="catalog" class="grid" aria-live="polite"></div>
+    <nav id="pagination" class="pagination" aria-label="Pagination"></nav>
   </main>
 
   <footer class="footer">© <span id="year"></span> My Book Store</footer>
 
-<script src="assets/app.js"></script>
+  <script src="assets/app.js"></script>
 </body>
 </html>
