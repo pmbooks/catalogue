@@ -56,12 +56,19 @@ function applyFilters(){
   const lang = document.getElementById('lang').value;
 
   filtered = books.filter(b => {
-    const matchesSearch = ((b.title || '') + ' ' + (b.author || '') + ' ' + (b.category || '')).toLowerCase().includes(q);
-    const matchesLang = (lang === 'all' || (b.language || '').toLowerCase() === lang.toLowerCase());
+    const matchesSearch =
+      ((b.title || '') + ' ' + (b.author || '') + ' ' + (b.category || ''))
+      .toLowerCase()
+      .includes(q);
+
+    const matchesLang =
+      (lang === 'all' || (b.language || '').toLowerCase() === lang.toLowerCase());
+
     return matchesSearch && matchesLang;
   });
 
   const s = sortEl.value;
+
   if (s === 'title') filtered.sort((a,b) => a.title.localeCompare(b.title));
   if (s === 'price_low') filtered.sort((a,b) => a.price - b.price);
   if (s === 'price_high') filtered.sort((a,b) => b.price - a.price);
@@ -76,4 +83,5 @@ fetch(BOOKS_URL).then(r=>{if(!r.ok)throw new Error('books.json load failed');ret
 searchEl.addEventListener('input',applyFilters);sortEl.addEventListener('change',applyFilters);
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.setAttribute('aria-hidden','true')});
+
 
