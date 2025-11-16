@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>My Book Store - Static</title>
+  <meta name="description" content="Simple static book store - deploy on GitHub Pages">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1 class="brand">My Book Store</h1>
+      <div class="search-cart">
+        <input id="search" placeholder="Search by title, author or category" />
+        <button id="cart-btn">Cart (<span id="cart-count">0</span>)</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="catalog"></section>
+  </main>
+
+  <!-- Cart modal -->
+  <div id="cart-modal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button id="close-cart" class="close">×</button>
+      <h2>Your Cart</h2>
+      <div id="cart-list"></div>
+      <div class="cart-footer">
+        <div id="cart-total">Total: ₹0</div>
+        <button id="checkout">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap">&copy; <span id="year"></span> My Book Store — Hosted on GitHub Pages</div>
+  </footer>
+
+  <script src="assets/app.js" defer></script>
+</body>
+</html>
