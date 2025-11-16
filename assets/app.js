@@ -1,19 +1,21 @@
-/*
- - BOOKS_URL: change this to your github-hosted books.json or published Google Sheets JSON URL
- - The code loads the JSON, extracts categories, renders category pills, supports search, sort, pagination
- - Buy Now button navigates to book.detail_link (you can replace with payment link)
- - Prices are formatted using Indian number grouping
-*/
-
-const BOOKS_URL = 'books.json'; // replace with your published Google Sheets JSON if needed
+// Main JS for index page: load books, render grid, modal, add-to-cart -> redirect to checkout
+const BOOKS_URL = 'books.json';
 const PER_PAGE = 9;
 let books = [], filtered = [], categories = [], currentPage = 1;
-
 const catalog = document.getElementById('catalog');
 const searchEl = document.getElementById('search');
 const sortEl = document.getElementById('sort');
 const catRow = document.getElementById('category-row');
 const pagination = document.getElementById('pagination');
+const modal = document.getElementById('product-modal');
+const modalImage = document.getElementById('modal-image');
+const modalTitle = document.getElementById('modal-title');
+const modalAuthor = document.getElementById('modal-author');
+const modalDesc = document.getElementById('modal-desc');
+const modalPrice = document.getElementById('modal-price');
+const modalQty = document.getElementById('modal-qty');
+const modalAdd = document.getElementById('modal-add');
+const closeModal = document.getElementById('close-modal');
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -27,62 +29,32 @@ function formatINR(n){
   return '₹' + res + '.' + s[1];
 }
 
-function renderCards(list){
-  catalog.innerHTML = '';
-  const start = (currentPage - 1) * PER_PAGE;
-  const pageItems = list.slice(start, start + PER_PAGE);
-  pageItems.forEach(b => {
-    const div = document.createElement('div'); div.className = 'card';
-    div.innerHTML = '<img src="'+(b.image||'https://via.placeholder.com/400x600?text=No+Image')+'" alt="'+(b.title||'')+'">'
-      + '<div class="card-body">'
-      + '<div class="title">'+(b.title||'Untitled')+'</div>'
-      + '<div class="author">'+(b.author||'')+'</div>'
-      + '<div class="price-row">'
-      + '<div class="price">'+formatINR(b.price||0)+'</div>'
-      + '<button class="buy" onclick="window.location.href=\''+(b.detail_link||'#')+'\'">Buy Now</button>'
-      + '</div></div>';
-    catalog.appendChild(div);
-  });
+function saveCart(cart){localStorage.setItem('cart_v1',JSON.stringify(cart||{}));}
+function loadCart(){return JSON.parse(localStorage.getItem('cart_v1')||'{}');}
+
+function openModal(book){modal.setAttribute('aria-hidden','false');modalImage.src=book.image;modalTitle.textContent=book.title;modalAuthor.textContent=book.author||'';modalDesc.innerHTML='';book.description.split('\n\n').forEach(p=>{const el=document.createElement('p');el.textContent=p;modalDesc.appendChild(el)});modalPrice.textContent=formatINR(book.price);modalQty.value='1';
+  modalAdd.onclick = ()=>{addToCart(book,Number(modalQty.value)||1); window.location.href='checkout.html';};
 }
+closeModal.onclick=()=>{modal.setAttribute('aria-hidden','true');}
+modal.onclick=(e)=>{if(e.target===modal) modal.setAttribute('aria-hidden','true');}
 
-function renderPagination(list){
-  pagination.innerHTML = '';
-  const pages = Math.max(1, Math.ceil(list.length / PER_PAGE));
-  for(let i = 1; i <= pages; i++){
-    const b = document.createElement('button');
-    b.className = 'page-btn' + (i === currentPage ? ' active' : '');
-    b.textContent = i; b.onclick = () => { currentPage = i; renderCards(filtered); renderPagination(filtered); window.scrollTo({top:0,behavior:'smooth'}); };
-    pagination.appendChild(b);
-  }
-}
+function addToCart(book,qty=1){const cart=loadCart(); if(cart[book.id]) cart[book.id].qty += qty; else cart[book.id]={id:book.id,title:book.title,price:book.price,image:book.image,qty:qty}; saveCart(cart); }
 
-function renderCategories(){
-  catRow.innerHTML = '';
-  const allPill = document.createElement('div'); allPill.className = 'pill active'; allPill.textContent = 'All';
-  allPill.onclick = () => { document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active')); allPill.classList.add('active'); searchEl.value=''; applyFilters(); };
-  catRow.appendChild(allPill);
-  categories.forEach(c => {
-    const p = document.createElement('div'); p.className = 'pill'; p.textContent = c || 'Uncategorized';
-    p.onclick = () => { document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active')); p.classList.add('active'); searchEl.value = c; applyFilters(); };
-    catRow.appendChild(p);
-  });
-}
+function renderPage(list){catalog.innerHTML='';const start=(currentPage-1)*PER_PAGE;const pageItems=list.slice(start,start+PER_PAGE);pageItems.forEach(b=>{const c=document.createElement('div');c.className='card';c.innerHTML=`<img src="${b.image}" data-id="${b.id}" alt="${b.title}">`+`<div class="card-body"><div class="title">${b.title}</div><div class="author">${b.author||''}</div><div class="price-row"><div class="price">${formatINR(b.price)}</div></div><div style="display:flex;gap:.5rem;justify-content:center;margin-top:.6rem"><button class="buy" data-id="${b.id}">Add to Cart</button></div></div>`;catalog.appendChild(c);
+    // image click -> open modal
+    c.querySelector('img').onclick = ()=>{openModal(b)};
+    // add to cart -> direct to checkout
+    c.querySelector('.buy').onclick = ()=>{addToCart(b,1); window.location.href='checkout.html';};
+  });}
 
-function applyFilters(){
-  const q = (searchEl.value || '').toLowerCase();
-  filtered = books.filter(b => ((b.title||'') + ' ' + (b.author||'') + ' ' + (b.category||'')).toLowerCase().includes(q));
-  const sortVal = sortEl.value;
-  if(sortVal === 'title') filtered.sort((a,b) => (a.title||'').localeCompare(b.title||''));
-  if(sortVal === 'price_low') filtered.sort((a,b) => (a.price||0) - (b.price||0));
-  if(sortVal === 'price_high') filtered.sort((a,b) => (b.price||0) - (a.price||0));
-  currentPage = 1; renderCards(filtered); renderPagination(filtered);
-}
+function renderPagination(list){pagination.innerHTML='';const pages=Math.max(1,Math.ceil(list.length/PER_PAGE));for(let i=1;i<=pages;i++){const btn=document.createElement('button');btn.className='page-btn'+(i===currentPage?' active':'');btn.textContent=i;btn.onclick=()=>{currentPage=i; renderPage(filtered); renderPagination(filtered); window.scrollTo({top:0,behavior:'smooth'});};pagination.appendChild(btn);}}
 
-fetch(BOOKS_URL).then(r => { if(!r.ok) throw new Error('Failed to load books.json'); return r.json(); }).then(data => {
-  books = data.map((b, idx) => ({ id: b.id || idx+1, title: b.title || 'Untitled', author: b.author || '', category: b.category || '', price: Number(b.price) || 0, image: b.image || 'https://via.placeholder.com/400x600?text=No+Image', detail_link: b.detail_link || '#' }));
-  categories = [...new Set(books.map(b => b.category).filter(Boolean))];
-  filtered = [...books]; renderCategories(); renderCards(filtered); renderPagination(filtered);
-}).catch(err => { console.error(err); catalog.innerHTML = '<p style="padding:1rem">Failed to load book data. Please check books.json or BOOKS_URL.</p>'; });
+function renderCategories(){catRow.innerHTML='';const all=document.createElement('div');all.className='pill active';all.textContent='All';all.onclick=()=>{document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));all.classList.add('active');searchEl.value='';applyFilters()};catRow.appendChild(all);categories.forEach(c=>{const p=document.createElement('div');p.className='pill';p.textContent=c;p.onclick=()=>{document.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));p.classList.add('active');searchEl.value=c;applyFilters()};catRow.appendChild(p)});}
 
-searchEl.addEventListener('input', () => { applyFilters(); });
-sortEl.addEventListener('change', () => { applyFilters(); });
+function applyFilters(){const q=(searchEl.value||'').toLowerCase();filtered=books.filter(b=>((b.title||'')+' '+(b.author||'')+' '+(b.category||'')).toLowerCase().includes(q));const s=sortEl.value;if(s==='title')filtered.sort((a,b)=>a.title.localeCompare(b.title));if(s==='price_low')filtered.sort((a,b)=>a.price-b.price);if(s==='price_high')filtered.sort((a,b)=>b.price-a.price);currentPage=1;renderPage(filtered);renderPagination(filtered)}
+
+fetch(BOOKS_URL).then(r=>{if(!r.ok)throw new Error('books.json load failed');return r.json()}).then(data=>{books=data.map((b,idx)=>({...b,id:b.id||String(idx+1),price:Number(b.price||0)}));categories=[...new Set(books.map(b=>b.category).filter(Boolean))];filtered=[...books];renderCategories();renderPage(filtered);renderPagination(filtered)}).catch(e=>{catalog.innerHTML='<p style="padding:1rem">Failed to load books.json</p>';console.error(e)});
+
+searchEl.addEventListener('input',applyFilters);sortEl.addEventListener('change',applyFilters);
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.setAttribute('aria-hidden','true')});
