@@ -1,15 +1,27 @@
-:root{--accent:#0a4dff;--text:#111;--muted:#666;--bg:#f4f6ff}
+:root {--bg:#f5f7fb;--text:#222;--muted:#666;--accent:#0044cc;--card-bg:#fff}
 body{margin:0;background:var(--bg);font-family:system-ui}
-.wrap{max-width:1300px;margin:auto;padding:1rem}
-.site-header{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:10}
-.brand{margin:0;font-size:1.8rem;font-weight:700}
-#search{padding:.6rem;border-radius:8px;border:1px solid #ccc;width:260px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem;margin-top:1.5rem}
-.card{background:#fff;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,.08);padding:1rem;display:flex;flex-direction:column;transition:.2s;}
-.card:hover{transform:translateY(-4px);box-shadow:0 6px 18px rgba(0,0,0,.12)}
-.card img{width:100%;height:300px;object-fit:cover;border-radius:10px}
-.card .title{font-size:1.05rem;font-weight:600;margin-top:.6rem;text-align:center;min-height:48px}
-.card .author{font-size:.9rem;color:var(--muted);text-align:center;margin-top:.25rem}
-.price-box{margin-top:auto;display:flex;justify-content:center;margin-top:1rem}
-.price-tag{background:var(--accent);color:#fff;padding:.5rem 1rem;border-radius:8px;font-size:1rem;font-weight:700}
-.site-footer{text-align:center;padding:1rem;margin-top:2rem;color:var(--muted)}
+.container{max-width:1200px;margin:auto;padding:1rem}
+.header{background:#fff;padding:1rem 0;border-bottom:1px solid #e2e2e2;position:sticky;top:0;z-index:100}
+.header-row{display:flex;justify-content:space-between;align-items:center}
+.logo{margin:0;font-size:1.8rem;font-weight:700}
+.filters{display:flex;gap:1.5rem}
+.filter-group{display:flex;flex-direction:column;font-size:.85rem}
+.search,select{padding:.6rem;border-radius:6px;border:1px solid #ccc;font-size:1rem;width:220px}
+.category-row{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1rem}
+.category-pill{background:#fff;padding:.5rem 1rem;border-radius:20px;box-shadow:0 2px 6px rgba(0,0,0,.1);cursor:pointer;font-size:.85rem}
+.category-pill.active{background:var(--accent);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.4rem;margin-top:2rem}
+.card{background:var(--card-bg);border-radius:10px;overflow:hidden;box-shadow:0 3px 8px rgba(0,0,0,.08);display:flex;flex-direction:column;transition:.2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.card img{width:100%;height:300px;object-fit:cover}
+.card-body{text-align:center;padding:1rem}
+.card-title{font-size:1.05rem;font-weight:600;min-height:48px}
+.card-author{font-size:.9rem;color:var(--muted);margin-top:.3rem}
+.price-box{margin-top:.8rem}
+.price{background:var(--accent);color:#fff;padding:.5rem 1rem;border-radius:6px;font-weight:700;display:inline-block}
+.buy-btn{margin-top:1rem;background:#ff6a00;color:#fff;border:none;padding:.6rem 1rem;border-radius:6px;cursor:pointer}
+.buy-btn:hover{background:#ff4500}
+.pagination{text-align:center;margin-top:2rem;display:flex;justify-content:center;gap:.5rem}
+.page-btn{padding:.5rem 1rem;background:#fff;border-radius:6px;border:1px solid #ccc;cursor:pointer}
+.page-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.footer{text-align:center;padding:1rem;color:var(--muted);margin-top:2rem}
