@@ -49,7 +49,35 @@ function renderPage(list){catalog.innerHTML='';const start=(currentPage-1)*PER_P
 
 function renderPagination(list){pagination.innerHTML='';const pages=Math.max(1,Math.ceil(list.length/PER_PAGE));for(let i=1;i<=pages;i++){const btn=document.createElement('button');btn.className='page-btn'+(i===currentPage?' active':'');btn.textContent=i;btn.onclick=()=>{currentPage=i; renderPage(filtered); renderPagination(filtered); window.scrollTo({top:0,behavior:'smooth'});};pagination.appendChild(btn);}}
 
-function renderCategories(){catRow.innerHTML='';const all=document.createElement('div');all.className='pill active';all.textContent='All';all.onclick=()=>{document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));all.classList.add('active');searchEl.value='';applyFilters()};catRow.appendChild(all);categories.forEach(c=>{const p=document.createElement('div');p.className='pill';p.textContent=c;p.onclick=()=>{document.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));p.classList.add('active');searchEl.value=c;applyFilters()};catRow.appendChild(p)});}
+function renderCategories() {
+  catRow.innerHTML = '';
+
+  const categoryList = [
+    'All Books',
+    'New Arrivals',
+    'Booklets',
+    'Kindle eBooks',
+    'Miscellaneous',
+    'DVDs/Video',
+    'CDs/Audio'
+  ];
+
+  categoryList.forEach((c, index) => {
+    const pill = document.createElement('div');
+    pill.className = 'pill' + (index === 0 ? ' active' : '');
+    pill.textContent = c;
+
+    pill.onclick = () => {
+      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      searchEl.value = c === 'All Books' ? '' : c;
+      applyFilters();
+    };
+
+    catRow.appendChild(pill);
+  });
+}
 
 function applyFilters(){
   const q = (searchEl.value || '').toLowerCase();
@@ -87,6 +115,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.setAttribute('aria-hidden','true')});
+
 
 
 
