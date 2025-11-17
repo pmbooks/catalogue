@@ -36,7 +36,16 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Aria
 .pill.active{background:var(--accent);color:#fff}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-top:1rem}
 .card{background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 3px 8px rgba(2,6,23,.06);display:flex;flex-direction:column}
-.card img{width:100%;height:300px;object-fit:cover;cursor:pointer}
+.card img {
+    width: 100%;
+    height: auto;
+    max-height: 260px;
+    object-fit: contain;
+    background: #fff;
+    padding: 10px;
+    cursor: pointer;
+}
+
 .card-body{padding:.9rem;text-align:center;display:flex;flex-direction:column;gap:.4rem}
 .title{font-weight:600;font-size:1rem;min-height:44px}
 .author{color:var(--muted);font-size:.88rem}
@@ -75,6 +84,7 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Aria
 .total-area{font-weight:700}
 
 @media (max-width:800px){.modal-dialog{flex-direction:column}.modal-left{flex-basis:auto}.modal-left img{max-width:120px}.controls input{width:160px}}
+
 
 
 
